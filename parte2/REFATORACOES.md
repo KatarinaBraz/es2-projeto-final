@@ -67,3 +67,16 @@ def _configure_settings_choices(form):
 ```
 
 A factory continuou criando e devolvendo o formulário, mas a preparação das opções ganhou uma função com intenção específica. A suíte permaneceu verde.
+
+## Refatoração complementar — extração em método longo
+
+**Commit:** `12063f8`  
+**Smell:** Long Method / responsabilidades misturadas  
+**Transformação:** Extract Method
+
+Durante a revisão final, identifiquei que o método `save()` em `flaskbb/user/models.py` também concentrava a atualização dos grupos secundários e a persistência do usuário. A lógica de atualização dos grupos foi extraída para um método específico:
+
+```python
+def _update_secondary_groups(self, groups: list[Group]) -> None:
+    ...
+git status
